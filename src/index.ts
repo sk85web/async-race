@@ -1,2 +1,6 @@
-const header = document.querySelector('h1');
-header?.addEventListener('click', () => console.log('test'));
+import garagePage from './components/garagePage';
+import './style.css';
+
+const body = document.querySelector('body') as HTMLElement;
+const page = garagePage();
+body.append(page);

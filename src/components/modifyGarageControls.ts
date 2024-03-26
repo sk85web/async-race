@@ -2,14 +2,21 @@ import generateButton from './generateButton';
 import generateInput from './generateInput';
 import generateColorPalete from './generateColorPalete';
 import './styles/modifyGarageControls.css';
+import handleCreateCar from './handleCreateCar';
 
 const createCarBlock = () => {
   const block = document.createElement('div');
   block.classList.add('block');
 
   const input = generateInput();
-  const button = generateButton('create');
+  input.classList.add('input-create');
   const colorPalete = generateColorPalete();
+  colorPalete.classList.add('palette-create');
+  const button = generateButton('create');
+  button.classList.add('button-create');
+
+  button.addEventListener('click', handleCreateCar);
+
   block.append(input, colorPalete, button);
   return block;
 };
@@ -19,8 +26,14 @@ const updateCarBlock = () => {
   block.classList.add('block');
 
   const input = generateInput();
+  input.classList.add('input-update');
   const button = generateButton('update');
+  button.classList.add('button-update');
   const colorPalete = generateColorPalete();
+  colorPalete.classList.add('colorPalete-update');
+
+  // button.addEventListener('click', updateClickCar);
+
   block.append(input, colorPalete, button);
   return block;
 };

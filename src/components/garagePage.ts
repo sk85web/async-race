@@ -6,8 +6,9 @@ import {
 } from './modifyGarageControls';
 import './styles/garagePage.css';
 import generateGarageBlock from './generateGarageBlock';
+import { getCars } from './api';
 
-const garagePage = () => {
+const garagePage = async () => {
   const page = document.createElement('main');
   const container = document.createElement('div');
   container.classList.add('container');
@@ -16,9 +17,13 @@ const garagePage = () => {
   const updateRow = updateCarBlock();
   const raceRow = raceCarBlock();
   container.append(createRow, updateRow, raceRow);
+  const cars = await getCars();
+  if (cars) {
+    const garage = generateGarageBlock(cars);
 
-  const garage = generateGarageBlock();
-  page.append(buttons, container, garage);
+    page.append(buttons, container, garage);
+  }
+
   return page;
 };
 

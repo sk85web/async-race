@@ -60,7 +60,7 @@ const createCar: (name: string, color: string) => Promise<ICar | null> = async (
   }
 };
 
-const deleteCar: (id: number) => void = async (id) => {
+const removeCar: (id: number) => void = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/garage/${id}`, {
       method: 'DELETE',
@@ -99,4 +99,4 @@ const updateCar: (car: ICar) => Promise<ICar> = async (car) => {
   }
 };
 
-export { getCarById, getCars, createCar, deleteCar, updateCar };
+export { getCarById, getCars, createCar, removeCar, updateCar, ICar };

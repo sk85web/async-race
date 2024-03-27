@@ -1,11 +1,12 @@
 import generateButton from './generateButton';
 import generateInput from './generateInput';
-import generateColorPalete from './generateColorPalete';
 import './styles/modifyGarageControls.css';
 import handleCreateCar from './handleCreateCar';
-// import { updateGarageBlock } from './handleUpdateCar';
 import { ICar } from './api';
 import handleUpdateCar from './handleUpdateCar';
+import handleRaceAllCars from './handleRaceAllCars';
+import handleResetAllCars from './handleResetAllCars';
+import generateSelectColor from './generateSelectColor';
 
 const createCarBlock = () => {
   const block = document.createElement('div');
@@ -13,7 +14,7 @@ const createCarBlock = () => {
 
   const input = generateInput();
   input.classList.add('input-create');
-  const colorPalete = generateColorPalete();
+  const colorPalete = generateSelectColor();
   colorPalete.classList.add('palette-create');
   const button = generateButton('create');
   button.classList.add('button-create');
@@ -32,7 +33,7 @@ const updateCarBlock = (car?: ICar) => {
   input.classList.add('input-update');
   const button = generateButton('update');
   button.classList.add('button-update');
-  const colorPalete = generateColorPalete();
+  const colorPalete = generateSelectColor();
   colorPalete.classList.add('palette-update');
   button.addEventListener('click', () => {
     if (car) {
@@ -51,7 +52,11 @@ const raceCarBlock = () => {
   block.classList.add('block', 'block_race');
 
   const raceButton = generateButton('race');
+  raceButton.classList.add('race-btn');
+  raceButton.addEventListener('click', handleRaceAllCars);
   const resetButton = generateButton('reset');
+  resetButton.addEventListener('click', handleResetAllCars);
+
   const generateCarsButton = generateButton('generate cars');
   block.append(raceButton, resetButton, generateCarsButton);
   return block;

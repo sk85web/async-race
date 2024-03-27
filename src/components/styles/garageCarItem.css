@@ -1,5 +1,6 @@
 .car-block {
   border-bottom: 2px #000 dashed;
+  overflow: hidden;
 }
 
 .controls-btn {
@@ -43,7 +44,6 @@
 .car-icon svg {
   position: absolute;
   bottom: -35px;
-  /* animation: moveRight 5s linear forwards; */
 }
 
 .finish-flag {
@@ -56,7 +56,6 @@
 .move {
   animation-name: moveRight;
   animation-timing-function: linear;
-  animation-fill-mode: forwards;
 }
 
 @keyframes moveRight {
@@ -64,6 +63,6 @@
     left: 0;
   }
   100% {
-    left: calc(100% - 100px);
+    left: calc(100vw - 200px);
   }
 }

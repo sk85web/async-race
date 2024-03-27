@@ -12,6 +12,7 @@ const startAnimation: (
   const animationDuration = timeInSeconds.toString().concat('s');
 
   updatedCarElement.style.animationDuration = animationDuration;
+  updatedCarElement.style.animationFillMode = 'forwards';
 
   updatedCarElement.classList.add('move');
 

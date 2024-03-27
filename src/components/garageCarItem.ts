@@ -1,4 +1,4 @@
-import { ICar, startCarEngine } from './api';
+import { ICar, startCarEngine, stopCarEngine } from './api';
 import generateButton from './generateButton';
 import './styles/garageCarItem.css';
 import carSvg from './carSvg';
@@ -43,8 +43,8 @@ const garageCarItem: (car: ICar) => HTMLElement = (car) => {
 
       if (carElement) {
         const allCarIcons = document.querySelectorAll('.car-icon');
-        allCarIcons.forEach((icon) => {
-          icon.classList.remove('move');
+        allCarIcons.forEach((carItem) => {
+          carItem.classList.remove('move');
         });
         carElement.classList.add('move');
       }
@@ -54,9 +54,26 @@ const garageCarItem: (car: ICar) => HTMLElement = (car) => {
     }
   });
 
+  stopBtn.addEventListener('click', async () => {
+    const carId = car.id;
+    const carData = await stopCarEngine(carId);
+    if (carData) {
+      const carElement = document.querySelector(
+        `#carblock${car.id} .car-icon`,
+      ) as HTMLElement;
+
+      if (carElement) {
+        carElement.classList.remove('move');
+      }
+    } else {
+      console.log('Failed to start the car engine.');
+    }
+  });
+
   stopBtn.classList.add('stop-btn');
   const carIcon = document.createElement('div');
   carIcon.classList.add('car-icon');
+  carIcon.setAttribute('id', `car${car.id}`);
   carIcon.innerHTML = carSvg;
   const paths = carIcon.querySelectorAll('path');
   paths.forEach((path) => {

@@ -117,6 +117,73 @@ const startCarEngine: (
   }
 };
 
+const stopCarEngine: (
+  id: number,
+) => Promise<{ velocity: number; distance: number } | null> = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/engine?id=${id}&status=stopped`, {
+      method: 'PATCH',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to stop car engine');
+    }
+
+    const data = await response.json();
+    return data as { velocity: number; distance: number };
+  } catch (error) {
+    console.error('Error stopping car engine: ', error);
+    return null;
+  }
+};
+
+const switchCarEngineToDriveMode: (carId: number) => Promise<boolean> = async (
+  carId,
+) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/engine?id=${carId}&status=drive`,
+      {
+        method: 'PATCH',
+      },
+    );
+    const data = await response.json();
+
+    if (response.status === 400) {
+      throw new Error(
+        'Wrong parameters: "id" should be any positive number, "status" should be "started", "stopped" or "drive"',
+      );
+    }
+
+    if (response.status === 404) {
+      throw new Error(
+        'Engine parameters for car with such id was not found in the garage. Have you tried to set engine status to "started" before?',
+      );
+    }
+
+    if (response.status === 429) {
+      throw new Error(
+        "Drive already in progress. You can't run drive for the same car twice while it's not stopped.",
+      );
+    }
+
+    if (response.status === 500) {
+      throw new Error(
+        "Car has been stopped suddenly. It's engine was broken down.",
+      );
+    }
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to switch engine to drive mode');
+    }
+
+    return data.success || false;
+  } catch (error) {
+    console.error('Error switching car engine to drive mode:', error);
+    return false;
+  }
+};
+
 export {
   getCarById,
   getCars,
@@ -124,5 +191,7 @@ export {
   removeCar,
   updateCar,
   startCarEngine,
+  stopCarEngine,
+  switchCarEngineToDriveMode,
   ICar,
 };

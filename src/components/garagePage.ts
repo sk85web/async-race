@@ -1,4 +1,4 @@
-import headerButtonBlock from './headerButtonBlock';
+// import { headerButtonBlock } from './headerButtonBlock';
 import {
   createCarBlock,
   raceCarBlock,
@@ -10,9 +10,10 @@ import { getCars } from './api';
 
 const garagePage = async () => {
   const page = document.createElement('main');
+  page.classList.add('garage-page');
+
   const container = document.createElement('div');
   container.classList.add('container');
-  const buttons = headerButtonBlock();
   const createRow = createCarBlock();
   const updateRow = updateCarBlock();
   updateRow.classList.add('updateRow');
@@ -21,8 +22,7 @@ const garagePage = async () => {
   const cars = await getCars();
   if (cars) {
     const garage = generateGarageBlock(cars);
-
-    page.append(buttons, container, garage);
+    page.append(container, garage);
   }
 
   return page;

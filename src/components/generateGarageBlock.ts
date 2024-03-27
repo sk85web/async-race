@@ -10,8 +10,8 @@ const generateGarageBlock: (cars: ICar[]) => HTMLElement = (cars) => {
   garage.insertAdjacentHTML(
     'afterbegin',
     `
-    <h1 class="garage__title">Garage (${allCarsNumber})</h1>
-    <h2 class="garage__page">Page #1</h2>
+    <h1 class="title garage__title">Garage (${allCarsNumber})</h1>
+    <h2 class="page garage__page">Page #1</h2>
   `,
   );
 

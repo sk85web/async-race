@@ -15,9 +15,7 @@ const startAnimation: (
   updatedCarElement.style.animationFillMode = 'forwards';
 
   updatedCarElement.classList.add('move');
-
   updatedCarElement.addEventListener('animationend', () => {
-    console.log('Car has finished the race!');
     updatedCarElement.classList.remove('move');
   });
 };

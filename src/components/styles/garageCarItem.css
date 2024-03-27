@@ -14,7 +14,7 @@
   color: rgb(183 4 4);
 }
 
-.startStop-btn {
+.startStop-btns {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -43,6 +43,7 @@
 .car-icon svg {
   position: absolute;
   bottom: -35px;
+  /* animation: moveRight 5s linear forwards; */
 }
 
 .finish-flag {
@@ -50,4 +51,19 @@
   align-self: flex-end;
   position: absolute;
   right: 100px;
+}
+
+.move {
+  animation-name: moveRight;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveRight {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: calc(100% - 100px);
+  }
 }

@@ -1,24 +1,26 @@
-import { ICar, removeCar } from './api';
+import { ICar, startCarEngine } from './api';
 import generateButton from './generateButton';
 import './styles/garageCarItem.css';
 import carSvg from './carSvg';
-import updateCarsCount from './updateCarsCount';
+import handleSelectCar from './handleSelectCar';
+import handleRemoveCar from './handleRemoveCar';
+import startAnimation from './startAnimation';
 
 const garageCarItem: (car: ICar) => HTMLElement = (car) => {
   const carBlock = document.createElement('div');
   carBlock.classList.add('car-block');
+  carBlock.setAttribute('id', `carblock${car.id}`);
 
   const controlsBtns = document.createElement('div');
   controlsBtns.classList.add('controls-btn');
   const selectBtn = generateButton('select');
+  selectBtn.classList.add('button-select');
   const removeBtn = generateButton('remove');
   removeBtn.classList.add('button-remove');
 
-  removeBtn.addEventListener('click', async () => {
-    removeCar(car.id);
-    carBlock.remove();
-    updateCarsCount();
-  });
+  selectBtn.addEventListener('click', () => handleSelectCar(car));
+
+  removeBtn.addEventListener('click', () => handleRemoveCar(car));
 
   const carName = document.createElement('span');
   carName.classList.add('car-name');
@@ -26,10 +28,32 @@ const garageCarItem: (car: ICar) => HTMLElement = (car) => {
   controlsBtns.append(selectBtn, removeBtn, carName);
 
   const startStopBtns = document.createElement('div');
-  startStopBtns.classList.add('startStop-btn');
+  startStopBtns.classList.add('startStop-btns');
   const startBtn = generateButton('A');
   const stopBtn = generateButton('B');
   startBtn.classList.add('start-btn');
+
+  startBtn.addEventListener('click', async () => {
+    const carId = car.id;
+    const carData = await startCarEngine(carId);
+    if (carData) {
+      const carElement = document.querySelector(
+        `#carblock${car.id} .car-icon`,
+      ) as HTMLElement;
+
+      if (carElement) {
+        const allCarIcons = document.querySelectorAll('.car-icon');
+        allCarIcons.forEach((icon) => {
+          icon.classList.remove('move');
+        });
+        carElement.classList.add('move');
+      }
+      startAnimation(carData, carElement);
+    } else {
+      console.log('Failed to start the car engine.');
+    }
+  });
+
   stopBtn.classList.add('stop-btn');
   const carIcon = document.createElement('div');
   carIcon.classList.add('car-icon');

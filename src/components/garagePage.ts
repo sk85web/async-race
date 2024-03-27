@@ -15,6 +15,7 @@ const garagePage = async () => {
   const buttons = headerButtonBlock();
   const createRow = createCarBlock();
   const updateRow = updateCarBlock();
+  updateRow.classList.add('updateRow');
   const raceRow = raceCarBlock();
   container.append(createRow, updateRow, raceRow);
   const cars = await getCars();

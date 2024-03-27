@@ -78,7 +78,7 @@ const removeCar: (id: number) => void = async (id) => {
 
 const updateCar: (car: ICar) => Promise<ICar> = async (car) => {
   try {
-    const response = await fetch(`${BASE_URL}/garage/}${car.id}`, {
+    const response = await fetch(`${BASE_URL}/garage/${car.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -99,4 +99,30 @@ const updateCar: (car: ICar) => Promise<ICar> = async (car) => {
   }
 };
 
-export { getCarById, getCars, createCar, removeCar, updateCar, ICar };
+const startCarEngine: (
+  id: number,
+) => Promise<{ velocity: number; distance: number } | null> = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/engine?id=${id}&status=started`, {
+      method: 'PATCH',
+    });
+    if (!response.ok) {
+      throw new Error('Failed to start car engine');
+    }
+    const data = await response.json();
+    return data as { velocity: number; distance: number };
+  } catch (error) {
+    console.error('Error starting car engine: ', error);
+    return null;
+  }
+};
+
+export {
+  getCarById,
+  getCars,
+  createCar,
+  removeCar,
+  updateCar,
+  startCarEngine,
+  ICar,
+};

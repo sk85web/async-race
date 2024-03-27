@@ -3,6 +3,9 @@ import generateInput from './generateInput';
 import generateColorPalete from './generateColorPalete';
 import './styles/modifyGarageControls.css';
 import handleCreateCar from './handleCreateCar';
+// import { updateGarageBlock } from './handleUpdateCar';
+import { ICar } from './api';
+import handleUpdateCar from './handleUpdateCar';
 
 const createCarBlock = () => {
   const block = document.createElement('div');
@@ -21,7 +24,7 @@ const createCarBlock = () => {
   return block;
 };
 
-const updateCarBlock = () => {
+const updateCarBlock = (car?: ICar) => {
   const block = document.createElement('div');
   block.classList.add('block');
 
@@ -30,9 +33,14 @@ const updateCarBlock = () => {
   const button = generateButton('update');
   button.classList.add('button-update');
   const colorPalete = generateColorPalete();
-  colorPalete.classList.add('colorPalete-update');
-
-  // button.addEventListener('click', updateClickCar);
+  colorPalete.classList.add('palette-update');
+  button.addEventListener('click', () => {
+    if (car) {
+      handleUpdateCar(car);
+    } else {
+      console.error('Car is not selected');
+    }
+  });
 
   block.append(input, colorPalete, button);
   return block;

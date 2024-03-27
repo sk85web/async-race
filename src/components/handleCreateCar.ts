@@ -17,6 +17,8 @@ const handleCreateCar = async () => {
     const carElement = garageCarItem(newCar);
     garage.append(carElement);
     updateCarsCount();
+    input.value = '';
+    colorPalete.value = '';
   }
 };
 

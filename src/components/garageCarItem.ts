@@ -34,6 +34,9 @@ const garageCarItem: (car: ICar) => HTMLElement = (car) => {
   startBtn.classList.add('start-btn');
 
   startBtn.addEventListener('click', async () => {
+    if (startBtn.classList.contains('disabled')) {
+      return;
+    }
     const carId = car.id;
     const carData = await startCarEngine(carId);
     if (carData) {
@@ -45,8 +48,10 @@ const garageCarItem: (car: ICar) => HTMLElement = (car) => {
         const allCarIcons = document.querySelectorAll('.car-icon');
         allCarIcons.forEach((carItem) => {
           carItem.classList.remove('move');
+          startBtn.classList.remove('disabled');
         });
         carElement.classList.add('move');
+        startBtn.classList.add('disabled');
       }
       startAnimation(carData, carElement);
     } else {
@@ -64,6 +69,8 @@ const garageCarItem: (car: ICar) => HTMLElement = (car) => {
 
       if (carElement) {
         carElement.classList.remove('move');
+        carElement.classList.remove('stop');
+        startBtn.classList.remove('disabled');
       }
     } else {
       console.log('Failed to start the car engine.');

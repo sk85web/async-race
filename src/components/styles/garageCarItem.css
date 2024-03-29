@@ -29,6 +29,13 @@
   color: #000;
   font-weight: 700;
 }
+
+.disabled {
+  background-color: #ccc;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .stop-btn {
   background-color: transparent;
   border: 2px solid rgb(81, 2, 190);
@@ -56,6 +63,11 @@
 .move {
   animation-name: moveRight;
   animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.stop {
+  left: calc(100vw - 240px);
 }
 
 @keyframes moveRight {
@@ -63,6 +75,6 @@
     left: 0;
   }
   100% {
-    left: calc(100vw - 200px);
+    left: calc(100vw - 240px);
   }
 }

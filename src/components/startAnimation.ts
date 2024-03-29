@@ -17,6 +17,7 @@ const startAnimation: (
   updatedCarElement.classList.add('move');
   updatedCarElement.addEventListener('animationend', () => {
     updatedCarElement.classList.remove('move');
+    updatedCarElement.classList.add('stop');
   });
 };
 

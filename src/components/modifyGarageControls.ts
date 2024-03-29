@@ -53,9 +53,20 @@ const raceCarBlock = () => {
 
   const raceButton = generateButton('race');
   raceButton.classList.add('race-btn');
-  raceButton.addEventListener('click', handleRaceAllCars);
+
+  raceButton.addEventListener('click', () => {
+    if (raceButton.classList.contains('disabled')) {
+      return;
+    }
+    handleRaceAllCars();
+    raceButton.classList.add('disabled');
+  });
+
   const resetButton = generateButton('reset');
-  resetButton.addEventListener('click', handleResetAllCars);
+  resetButton.addEventListener('click', () => {
+    handleResetAllCars();
+    raceButton.classList.remove('disabled');
+  });
 
   const generateCarsButton = generateButton('generate cars');
   block.append(raceButton, resetButton, generateCarsButton);

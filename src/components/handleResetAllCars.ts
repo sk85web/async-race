@@ -10,10 +10,14 @@ const handleResetAllCars = async () => {
     const carData = await stopCarEngine(carId);
     if (carData) {
       car.classList.remove('move');
+      car.classList.remove('stop');
     } else {
       console.log('Failed to stop all cars engine.');
     }
   });
+
+  const raceButtons = document.querySelectorAll('.start-btn');
+  raceButtons.forEach((btn) => btn.classList.remove('disabled'));
 };
 
 export default handleResetAllCars;

@@ -60,7 +60,7 @@ const createCar: (name: string, color: string) => Promise<ICar | null> = async (
   }
 };
 
-const removeCar: (id: number) => void = async (id) => {
+const removeCar: (id: number) => Promise<void> = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/garage/${id}`, {
       method: 'DELETE',

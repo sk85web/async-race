@@ -3,7 +3,7 @@ import updateCarsCount from './updateCarsCount';
 
 const handleRemoveCar = async (car: ICar) => {
   const carBlock = document.getElementById(`carblock${car.id}`) as HTMLElement;
-  removeCar(car.id);
+  await removeCar(car.id);
   carBlock.remove();
   updateCarsCount();
 };

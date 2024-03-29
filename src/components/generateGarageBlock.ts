@@ -17,7 +17,7 @@ const generateGarageBlock: (cars: ICar[]) => HTMLElement = (cars) => {
 
   cars.forEach((car) => {
     const carItem = garageCarItem(car);
-    garage.appendChild(carItem);
+    garage.append(carItem);
   });
 
   return garage;

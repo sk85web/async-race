@@ -11,14 +11,16 @@ const handleCreateCar = async () => {
   const name = input.value;
   const color = colorPalete.value;
 
-  const newCar = await createCar(name, color);
-  if (newCar) {
-    const garage = document.querySelector('.garage') as HTMLElement;
-    const carElement = garageCarItem(newCar);
-    garage.append(carElement);
-    updateCarsCount();
-    input.value = '';
-    colorPalete.value = '';
+  if (name && color) {
+    const newCar = await createCar(name, color);
+    if (newCar) {
+      const garage = document.querySelector('.garage') as HTMLElement;
+      const carElement = garageCarItem(newCar);
+      garage.append(carElement);
+      updateCarsCount();
+      input.value = '';
+      colorPalete.value = '';
+    }
   }
 };
 

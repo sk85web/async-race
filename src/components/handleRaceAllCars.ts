@@ -33,7 +33,7 @@ const handleRaceAllCars = async () => {
     return Promise.resolve();
   });
 
-  await Promise.race(promises).then(() => {
+  await Promise.race(promises).then(async () => {
     const winnerId = Object.keys(raceTimes).reduce(
       (a, b) => (raceTimes[+a] < raceTimes[+b] ? a : b),
       '',

@@ -1,1 +1,0 @@
-(()=>{"use strict";const e=document.querySelector("h1");null==e||e.addEventListener("click",(()=>console.log("first")))})();

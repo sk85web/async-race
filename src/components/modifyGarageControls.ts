@@ -7,6 +7,7 @@ import handleUpdateCar from './handleUpdateCar';
 import handleRaceAllCars from './handleRaceAllCars';
 import handleResetAllCars from './handleResetAllCars';
 import generateSelectColor from './generateSelectColor';
+import handleGenerateCars from './handleGenerateCars';
 
 const createCarBlock = () => {
   const block = document.createElement('div');
@@ -69,6 +70,12 @@ const raceCarBlock = () => {
   });
 
   const generateCarsButton = generateButton('generate cars');
+  generateCarsButton.classList.add('generate-btn');
+  generateCarsButton.addEventListener('click', async () => {
+    const genCars = await handleGenerateCars();
+    console.log(genCars);
+  });
+
   block.append(raceButton, resetButton, generateCarsButton);
   return block;
 };

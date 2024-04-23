@@ -67,7 +67,7 @@
 }
 
 .stop {
-  left: calc(100vw - 240px);
+  left: calc(100vw - 235px);
 }
 
 @keyframes moveRight {
@@ -75,6 +75,6 @@
     left: 0;
   }
   100% {
-    left: calc(100vw - 240px);
+    left: calc(100vw - 235px);
   }
 }

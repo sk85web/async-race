@@ -1,0 +1,10 @@
+.button-block-footer {
+  margin-top: 30px;
+}
+
+.prev-btn,
+.next-btn {
+  background-color: #313131;
+  color: #fff;
+  width: 100px;
+}
